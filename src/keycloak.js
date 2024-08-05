@@ -6,6 +6,6 @@ const keycloak = new Keycloak({
     realm: 'batch-alerte',
     clientId: 'Batch-BackOffice',
 });
-console.log(keycloak.token)
+
 
 export default keycloak;

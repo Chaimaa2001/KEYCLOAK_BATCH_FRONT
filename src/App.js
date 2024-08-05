@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import TransactionsList from './components/transactions/TransactionsList';
 import Profile from './components/Profile';
-
+import ChangePassword from "./components/ChangePassword";
 function App() {
     return (
         <Router>
@@ -13,6 +13,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<TransactionsList />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/change-password" element={<ChangePassword />} />
                 </Routes>
             </div>
         </Router>

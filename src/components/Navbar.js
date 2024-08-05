@@ -1,11 +1,21 @@
 // src/components/Navbar.js
 import React, { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { UserContext } from '../context/UserContext';
+import keycloak from '../keycloak';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const user = useContext(UserContext);
+
+    const handleLogout = () => {
+        keycloak.logout();
+    };
+
+    const handleLogin = () => {
+        keycloak.login();
+    };
 
     return (
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -29,11 +39,17 @@ const Navbar = () => {
                     <ul className="navbar-nav">
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                {user ? user.fullName : '[User]'}
+                                {user ? user.fullName : 'Login'}
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end">
-                                <li><a className="dropdown-item" href="#">Logout</a></li>
-                                <li><a className="dropdown-item" href="#">Change Password</a></li>
+                                {user ? (
+                                    <>
+                                        <li><a className="dropdown-item" href="#" onClick={handleLogout}>Logout</a></li>
+                                        <li><Link className="dropdown-item" to="/change-password">Change Password</Link></li>
+                                    </>
+                                ) : (
+                                    <li><a className="dropdown-item" href="#" onClick={handleLogin}>Login</a></li>
+                                )}
                             </ul>
                         </li>
                     </ul>

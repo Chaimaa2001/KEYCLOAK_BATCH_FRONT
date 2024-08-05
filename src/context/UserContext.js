@@ -5,24 +5,21 @@ import keycloak from '../keycloak';
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-    const [authenticated, setAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    console.log(keycloak.token)
     useEffect(() => {
         keycloak.init({
-            onLoad: 'check-sso',
-            promiseType: 'native',
-            redirectUri: window.location.origin
+            onLoad: 'login-required',
+            promiseType: 'native'
         }).then(auth => {
-            console.log('Keycloak authentication result:', auth);
             if (auth) {
                 const token = keycloak.tokenParsed;
                 setUser({
                     fullName: token.given_name + ' ' + token.family_name
                 });
             }
-            setAuthenticated(auth);
             setLoading(false);
         }).catch(error => {
             console.error('Keycloak init error:', error);
@@ -30,13 +27,11 @@ export const UserProvider = ({ children }) => {
         });
     }, []);
 
-
-
     if (loading) {
         return <div>Loading...</div>;
     }
 
-    if (!authenticated) {
+    if (!user) {
         return <div>Authentication failed. Please reload the page.</div>;
     }
 
