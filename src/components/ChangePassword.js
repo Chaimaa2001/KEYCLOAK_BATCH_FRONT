@@ -1,7 +1,6 @@
-// src/components/ChangePassword.js
 import React from 'react';
-import keycloak from '../keycloak';
 import { useNavigate } from 'react-router-dom';
+import keycloak from "../keycloak";
 
 const ChangePassword = () => {
     const navigate = useNavigate();

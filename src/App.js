@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import TransactionsList from './components/transactions/TransactionsList';
 import Profile from './components/Profile';
 import ChangePassword from "./components/ChangePassword";
+import ClientDetail from "./components/clients/ClientDetails";
 function App() {
     return (
         <Router>
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/" element={<TransactionsList />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/change-password" element={<ChangePassword />} />
+                    <Route path="/client/:id" element={<ClientDetail />} />
                 </Routes>
             </div>
         </Router>

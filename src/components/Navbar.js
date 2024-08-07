@@ -1,4 +1,3 @@
-// src/components/Navbar.js
 import React, { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
