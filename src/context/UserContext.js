@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    console.log(keycloak.authenticated)
     console.log(keycloak.token)
     useEffect(() => {
         keycloak.init({

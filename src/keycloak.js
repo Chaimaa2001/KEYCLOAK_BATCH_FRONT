@@ -5,6 +5,7 @@ const keycloak = new Keycloak({
     url: 'http://localhost:8080',
     realm: 'batch-alerte',
     clientId: 'Batch-BackOffice',
+    //clientSecret: 'Ui3usi95lTslPHhyOwnHLPBbOac6GiQK'
 });
 
 
