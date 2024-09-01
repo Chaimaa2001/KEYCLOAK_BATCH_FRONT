@@ -1,0 +1,126 @@
+/* Styles par défaut (thème clair) */
+.navbar-container {
+    background: linear-gradient(to right, #1e3c72, #2a69ac); /* Dégradé de bleu */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+/* Styles pour le thème sombre */
+.dark.navbar-container {
+    background: #001529; /* Couleur de fond sombre */
+    color: white;
+}
+
+.light.navbar-container {
+    background: linear-gradient(to right, #1e3c72, #2a69ac); /* Couleur de fond clair */
+    color: white;
+}
+
+/* Autres styles */
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center; /* Assurez-vous que les éléments sont bien alignés */
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    display: flex; /* Flexbox pour aligner l'image et le texte si nécessaire */
+    align-items: center; /* Centrer l'image verticalement */
+}
+
+.navbar-logo {
+    height: 40px; /* Ajustez la hauteur du logo */
+    width: auto; /* Maintient le ratio d'aspect */
+    margin-right: 15px; /* Espace entre le logo et le texte, si nécessaire */
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar-menu a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar-menu a:hover {
+    color: #ffcc00; /* Couleur au survol */
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-avatar-button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+.user-avatar {
+    background-color: #87d068;
+}
+
+.navbar-toggler {
+    display: none;
+}
+
+.navbar-drawer {
+    background: linear-gradient(to right, #1e3c72, #2a69ac); /* Dégradé de bleu pour le drawer */
+}
+
+.ant-drawer-body {
+    padding: 0;
+}
+
+.ant-menu {
+    width: 100%;
+    background: transparent; /* Fond transparent pour le menu */
+}
+
+.ant-menu-item {
+    color: white; /* Couleur des éléments de menu */
+}
+
+.ant-menu-item:hover {
+    background: rgba(255, 204, 0, 0.2); /* Fond au survol des éléments de menu */
+}
+
+.ant-menu-item a {
+    color: inherit; /* Hérite de la couleur des éléments de menu */
+}
+
+.ant-menu-item a:hover {
+    color: #ffcc00; /* Couleur au survol des liens */
+}
+
+/* Bouton de basculement de thème */
+.theme-toggle {
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .navbar-menu {
+        display: none;
+    }
+    .navbar-toggler {
+        display: block;
+        color: white;
+    }
+}

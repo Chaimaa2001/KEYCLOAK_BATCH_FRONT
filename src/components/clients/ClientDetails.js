@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // Pour récupérer l'ID du client depuis l'URL
+import { useParams, useNavigate } from 'react-router-dom'; // Importez useNavigate
 import keycloak from "../../keycloak";
+import { Card, Spin, Alert, Table, Typography, Button } from 'antd';
+import './ClientDetails.css';
+
+const { Title } = Typography;
 
 function ClientDetails() {
     const { id } = useParams(); // Récupérer l'ID du client depuis l'URL
+    const navigate = useNavigate(); // Créez une instance de useNavigate
     const [client, setClient] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -55,27 +60,76 @@ function ClientDetails() {
     };
 
     if (loading) {
-        return <div className="container mt-4"><div className="alert alert-info">Loading...</div></div>;
+        return (
+            <div className="container mt-4">
+                <Spin tip="Loading..." size="large" />
+            </div>
+        );
     }
 
     if (error) {
-        return <div className="container mt-4"><div className="alert alert-danger">Error: {error.message}</div></div>;
+        return (
+            <div className="container mt-4">
+                <Alert message="Error" description={error.message} type="error" showIcon />
+            </div>
+        );
     }
+
+    const columns = [
+        {
+            title: 'Attribute',
+            dataIndex: 'attribute',
+            key: 'attribute',
+        },
+        {
+            title: 'Value',
+            dataIndex: 'value',
+            key: 'value',
+            render: (text, record) => {
+                // Ajout de la logique pour l'email
+                if (record.attribute === 'Email') {
+                    return (
+                        <a href={`mailto:${text}`} target="_blank" rel="noopener noreferrer">
+                            {text}
+                        </a>
+                    );
+                }
+                return text;
+            },
+        },
+    ];
+
+    const dataSource = [
+        { key: '1', attribute: 'ID', value: client.userID },
+        { key: '2', attribute: 'Prénom', value: client.prenom || 'N/A' },
+        { key: '3', attribute: 'Nom', value: client.nom || 'N/A' },
+        { key: '4', attribute: 'Date of Birth', value: client.dateNaissance ? new Date(client.dateNaissance).toLocaleDateString() : 'N/A' },
+        { key: '5', attribute: 'Bank Code', value: client.bankCode || 'N/A' },
+        { key: '6', attribute: 'Email', value: client.email || 'N/A' },
+        { key: '7', attribute: 'Phone Number', value: client.phoneNumber || 'N/A' },
+    ];
 
     return (
         <div className="container mt-4">
-            <h1 className="mb-4">Client Details</h1>
+            <Button
+                type="primary"
+                onClick={() => navigate(-1)} // Fonction pour revenir en arrière
+                style={{ marginBottom: '20px' }}
+            >
+                Retour
+            </Button>
+            <Title level={1}>Client Details</Title>
             {client ? (
-                <div>
-                    <p><strong>ID:</strong> {client.userID}</p>
-                    <p><strong>Prenom:</strong> {client.prenom || 'N/A'}</p>
-                    <p><strong>Nom:</strong> {client.nom || 'N/A'}</p>
-                    <p><strong>Date of Birth:</strong> {client.dateNaissance ? new Date(client.dateNaissance).toLocaleDateString() : 'N/A'}</p>
-                    <p><strong>Bank Code:</strong> {client.bankCode || 'N/A'}</p>
-                    {/* Ajoutez d'autres informations client ici */}
-                </div>
+                <Card>
+                    <Table
+                        dataSource={dataSource}
+                        columns={columns}
+                        pagination={false}
+                        bordered
+                    />
+                </Card>
             ) : (
-                <div className="alert alert-info">Client not found</div>
+                <Alert message="Client not found" type="info" showIcon />
             )}
         </div>
     );

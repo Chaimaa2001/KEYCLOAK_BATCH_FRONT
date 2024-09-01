@@ -1,0 +1,19 @@
+/* ClientDetails.css */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.mt-4 {
+    margin-top: 20px;
+}
+
+.ant-card {
+    margin-bottom: 20px;
+}
+
+.ant-table {
+    margin-top: 20px;
+}
